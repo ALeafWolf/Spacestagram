@@ -1,6 +1,18 @@
 import React from 'react';
+import Box from '@mui/material/Box';
 import Masonry from '@mui/lab/Masonry';
-import Stack from '@mui/material/Stack';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import IconButton from '@mui/material/IconButton';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import Typography from '@mui/material/Typography';
+import CircularProgress from '@mui/material/CircularProgress';
+
+import MediaCard from './MediaCard';
+
 import './Style.css';
 
 type Props = {};
@@ -46,21 +58,21 @@ export default class Main extends React.Component<Props, State>{
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
-            return <div>Loading...</div>;
+            return (
+                <CircularProgress size={30} style={{ marginTop: "20%" }}></CircularProgress>
+
+            );
         } else {
             return (
-                <Masonry columns={{xs: 1, sm: 3, md: 4, lg: 5}} spacing={1}>
+                <Masonry columns={{ xs: 1, sm: 3, md: 4 }} spacing={1}>
                     {items.map((item, index) => (
-                        <Stack key={index}>
-                            {item.media_type === "image" &&
-                                <img
-                                    src={item.url}
-                                    alt={item.title}
-                                    loading="lazy"
-                                    style={{ borderBottomLeftRadius: 4, borderBottomRightRadius: 4 }}
-                                />
-                            }
-                        </Stack>
+                        <MediaCard
+                            key={index}
+                            mediaUrl={item.url}
+                            mediaType={item.media_type}
+                            title={item.title}
+                            date={item.date}
+                            description={item.explanation} />
                     ))}
                 </Masonry>
             );
