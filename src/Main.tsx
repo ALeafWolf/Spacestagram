@@ -1,19 +1,8 @@
 import React from 'react';
-import Box from '@mui/material/Box';
 import Masonry from '@mui/lab/Masonry';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import IconButton from '@mui/material/IconButton';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import MediaCard from './MediaCard';
-
-import './Style.css';
 
 type Props = {};
 type State = {
@@ -66,6 +55,7 @@ export default class Main extends React.Component<Props, State>{
             return (
                 <Masonry columns={{ xs: 1, sm: 3, md: 4 }} spacing={1}>
                     {items.map((item, index) => (
+                        //TODO: Excluce 'other' media_type
                         <MediaCard
                             key={index}
                             mediaUrl={item.url}
